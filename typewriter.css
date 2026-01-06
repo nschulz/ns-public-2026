@@ -2,6 +2,7 @@
     --bg-color: #050505;
     --text-color: #ffffff;
     --accent-color: #00ff88;
+    --faded-color: rgba(255, 255, 255, 0.25);
     --font-size-large: 10vw;
     --font-size-medium: 6vw;
 }
@@ -16,26 +17,32 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     font-family: 'Inter', sans-serif;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    padding: 2rem;
+    min-height: 100vh;
+    padding: 15vh 2rem;
+    line-height: 1.2;
+    overflow-x: hidden;
 }
 
 .typewriter-container {
     max-width: 90vw;
     text-align: left;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10vw;
 }
 
-.typewriter-text {
+.statement {
     font-size: var(--font-size-large);
     font-weight: 800;
-    line-height: 1.1;
     letter-spacing: -0.03em;
     white-space: pre-wrap;
     word-break: break-word;
+    transition: color 0.8s ease;
+}
+
+.statement.finished {
+    color: var(--faded-color);
 }
 
 .cursor {
@@ -48,22 +55,17 @@ body {
     animation: blink 0.8s infinite;
 }
 
-.fade-out-up {
-    animation: fadeOutUp 0.8s forwards ease-in-out;
+.nav-link a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+    display: inline-block;
 }
 
-@keyframes fadeOutUp {
-    0% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    100% {
-        opacity: 0;
-        transform: translateY(-50px);
-    }
+.nav-link a:hover {
+    color: var(--accent-color);
+    transform: translateX(10px);
 }
-
 
 @keyframes blink {
 
@@ -78,7 +80,7 @@ body {
 }
 
 @media (max-width: 768px) {
-    .typewriter-text {
+    .statement {
         font-size: var(--font-size-medium);
     }
 }

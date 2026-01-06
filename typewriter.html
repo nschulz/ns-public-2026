@@ -12,55 +12,101 @@
 </head>
 
 <body>
-    <div class="typewriter-container">
-        <span id="text" class="typewriter-text"></span><span class="cursor"></span>
+    <div class="typewriter-container" id="container">
+        <!-- Statements will be added here dynamically -->
     </div>
 
     <script>
-        const textElement = document.getElementById('text');
+        const container = document.getElementById('container');
         const statements = [
-            `Hi, I'm Nate.\nI work in “computers”.`,
-            `I used Netscape.`,
-            `I had Yellow Pages for the World Wide Web.`,
+            `Hi, I'm Nate.`,
+            `I work in “computers”.`,
+            `I “hacked” with ResEdit.`,
+            `I had Yellow Pages for the Web.`,
+            `Removing Netscape's focus ring changed my life.`,
+            `I made web pages with tables.`,
             `I wrote PHP before it ran in HipHop.`,
             `I went social in the 'The' era.`,
-            `I once sent my boss our 'Tim Cook' demo at 5am.`,
-            `You'll find me at Amazon, building teams and software for Ring.`,
+            `I'm building software and teams in the 'A.I.' era.`,
+            `You can find me at Amazon, delivering for Ring.`,
+            `Connect with me →`
         ];
 
-        const container = document.querySelector('.typewriter-container');
         let statementIndex = 0;
         let charIndex = 0;
-        let typingSpeed = 100;
+        let currentElement = null;
+        let cursor = null;
+
+        function createStatementElement() {
+            const div = document.createElement('div');
+            div.className = 'statement';
+            container.appendChild(div);
+
+            // Create cursor if it doesn't exist, otherwise move it
+            if (!cursor) {
+                cursor = document.createElement('span');
+                cursor.className = 'cursor';
+            }
+
+            return div;
+        }
 
         function type() {
-            const currentStatement = statements[statementIndex];
+            if (charIndex === 0) {
+                currentElement = createStatementElement();
+                currentElement.appendChild(cursor);
+            }
 
-            textElement.textContent = currentStatement.substring(0, charIndex + 1);
+            const currentText = statements[statementIndex];
+
+            // Insert text before the cursor
+            const textNode = document.createTextNode(currentText.substring(charIndex, charIndex + 1));
+            currentElement.insertBefore(textNode, cursor);
+
             charIndex++;
-            typingSpeed = 100;
 
-            if (charIndex === currentStatement.length) {
-                // Statement fully typed
+            // Auto-scroll to bottom
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: 'smooth'
+            });
+
+            if (charIndex === currentText.length) {
+                // Statement finished
                 setTimeout(() => {
-                    container.classList.add('fade-out-up');
+                    // Don't fade out the last statement (the arrow)
+                    if (statementIndex < statements.length - 1) {
+                        currentElement.classList.add('finished');
+                    } else {
+                        // Transform the arrow into a link
+                        currentElement.classList.add('nav-link');
+                        const link = document.createElement('a');
+                        link.href = 'index.html';
+                        link.textContent = currentText;
+                        currentElement.textContent = '';
+                        currentElement.appendChild(link);
+                        // Move cursor into link
+                        link.appendChild(cursor);
+                    }
 
-                    // Wait for fade animation to complete
+                    // Pause before next statement
                     setTimeout(() => {
-                        container.classList.remove('fade-out-up');
-                        textElement.textContent = '';
                         charIndex = 0;
-                        statementIndex = (statementIndex + 1) % statements.length;
-                        // Start next statement
-                        setTimeout(type, 500);
-                    }, 800); // Matches CSS animation duration
-                }, 2000); // Pause at end of statement
+                        statementIndex++;
+
+                        if (statementIndex < statements.length) {
+                            type();
+                        } else {
+                            // Final state reached
+                        }
+                    }, 500);
+                }, 2000); // Wait at end of statement
             } else {
-                setTimeout(type, typingSpeed);
+                setTimeout(type, 80); // Typing speed
             }
         }
 
-        // Start the effect
+        // Start the process
         setTimeout(type, 1000);
     </script>
 </body>
