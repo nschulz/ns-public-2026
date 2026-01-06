@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statements | Nate Schulz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="typewriter.css">
+</head>
+
+<body>
+    <div class="typewriter-container">
+        <span id="text" class="typewriter-text"></span><span class="cursor"></span>
+    </div>
+
+    <script>
+        const textElement = document.getElementById('text');
+        const statements = [
+            `Hi, I'm Nate.\nI work in “computers”.`,
+            `I used Netscape.`,
+            `I had Yellow Pages for the Web.`,
+            `I wrote PHP before it ran in HipHop.`,
+            `I went social in the 'The' era.`,
+            `I once sent my boss our 'Tim Cook' demo at 5am.`,
+            `You'll find me at Amazon, building teams and software for Ring.`,
+        ];
+
+        let statementIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typingSpeed = 100;
+
+        function type() {
+            const currentStatement = statements[statementIndex];
+
+            if (isDeleting) {
+                textElement.textContent = currentStatement.substring(0, charIndex - 1);
+                charIndex--;
+                typingSpeed = 50;
+            } else {
+                textElement.textContent = currentStatement.substring(0, charIndex + 1);
+                charIndex++;
+                typingSpeed = 100;
+            }
+
+            if (!isDeleting && charIndex === currentStatement.length) {
+                isDeleting = true;
+                typingSpeed = 2000; // Pause at the end
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                statementIndex = (statementIndex + 1) % statements.length;
+                typingSpeed = 500; // Pause before next
+            }
+
+            setTimeout(type, typingSpeed);
+        }
+
+        // Start the effect
+        setTimeout(type, 1000);
+    </script>
+</body>
+
+</html>

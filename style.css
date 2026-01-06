@@ -21,69 +21,13 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   line-height: 1.6;
-  overflow-x: hidden;
-  background-image: url('assets/background.png');
+  background-image: url('assets/background.jpg');
   background-size: 130%;
   /* Increased for more pan room */
   background-position: center;
   background-attachment: fixed;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   padding: 2rem 1rem;
-}
-
-/* Background Decorations */
-.bg-decor {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 0;
-  /* display: none; */
-}
-
-.blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(100px);
-  opacity: 0.25;
-  /* Increased opacity */
-  transition: var(--transition);
-}
-
-.blob-1 {
-  width: 600px;
-  /* Increased size */
-  height: 600px;
-  background: var(--accent-cyan);
-  top: -200px;
-  left: -200px;
-  animation: float1 18s infinite alternate ease-in-out;
-}
-
-.blob-2 {
-  width: 700px;
-  /* Increased size */
-  height: 700px;
-  background: var(--accent-violet);
-  bottom: -250px;
-  right: -250px;
-  animation: float2 22s infinite alternate-reverse ease-in-out;
-}
-
-.blob-3 {
-  width: 300px;
-  height: 300px;
-  background: var(--accent-cyan);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  animation: float3 12s infinite alternate ease-in-out;
 }
 
 .container {
@@ -93,7 +37,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 1;
+  margin: 0 auto;
 }
 
 /* Header Section - Editorial Style */
