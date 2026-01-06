@@ -4,9 +4,10 @@
   --accent-cyan: #00f2ff;
   --accent-violet: #7000ff;
   --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-bg-hover: rgba(255, 255, 255, 0.1);
   --glass-border: rgba(255, 255, 255, 0.1);
   --glass-border-hover: rgba(255, 255, 255, 0.3);
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition: all 0.3s ease-in-out;
 }
 
 * {
@@ -21,7 +22,7 @@ body {
   color: var(--text-color);
   line-height: 1.6;
   overflow-x: hidden;
-  background-image: linear-gradient(rgba(10, 11, 16, 0.7), rgba(10, 11, 16, 0.7)), url('assets/background.png');
+  background-image: url('assets/background.png');
   background-size: 130%;
   /* Increased for more pan room */
   background-position: center;
@@ -31,7 +32,6 @@ body {
   flex-direction: column;
   align-items: center;
   padding: 2rem 1rem;
-  animation: bgPan 25s ease-in-out infinite alternate;
 }
 
 /* Background Decorations */
@@ -44,6 +44,7 @@ body {
   overflow: hidden;
   pointer-events: none;
   z-index: 0;
+  /* display: none; */
 }
 
 .blob {
@@ -151,7 +152,8 @@ h1 {
 
 /* Links Section */
 .links-container {
-  width: 50%;
+  width: 67%;
+  min-width: 300px;
   display: flex;
   flex-direction: column;
   animation: fadeInUp 0.8s ease-out 0.2s both;
@@ -160,8 +162,6 @@ h1 {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--glass-border-hover);
-  box-shadow: 0 0 40px var(--glass-border);
-  background-clip: padding-box;
 }
 
 .link-card {
@@ -170,18 +170,17 @@ h1 {
   text-decoration: none;
   color: var(--text-color);
   background: transparent;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 1px solid transparent;
   border-bottom-color: rgba(0, 0, 0, 0.1);
   border-top-color: var(--glass-border);
   text-align: left;
   font-weight: 500;
   font-size: 1.1rem;
-  transition: var(--transition);
-  position: relative;
-  overflow: hidden;
+  transition: background-color 0.2s ease-out;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+  user-select: none;
 }
 
 .link-card:last-of-type {
@@ -206,45 +205,9 @@ h1 {
 
 .link-card:hover,
 .link-card:active {
-  background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 10px 25px rgba(0, 242, 255, 0.15);
+  background: var(--glass-bg-hover);
 }
 
-.link-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  transition: 0.5s;
-}
-
-.link-card:hover::before {
-  left: 100%;
-}
-
-/* Socials Footer */
-footer {
-  margin-top: 4rem;
-  display: flex;
-  gap: 2rem;
-  animation: fadeIn 1s ease-out 0.5s both;
-}
-
-.social-icon {
-  color: var(--text-color);
-  font-size: 1.5rem;
-  transition: var(--transition);
-}
-
-.social-icon:hover {
-  color: var(--accent-cyan);
-  transform: scale(1.2);
-}
 
 /* Animations */
 @keyframes bgPan {
