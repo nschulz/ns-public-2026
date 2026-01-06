@@ -40,4 +40,6 @@ This project is a premium, personal branded landing page (Linktree alternative) 
 - **Initial Request**: Project started on Jan 6, 2026. Goal: Create a personal branded landing page similar to Linktree.
 - **Design Approval**: User approved "Futuristic Dark Mode" with glassmorphism.
 - **Background Motion**: User requested motion for the background; implemented CSS panning and floating animated blobs.
+- **SEO Migration**: Extracted titles, descriptions, keywords, and verification tags from `nateschulz.com` and applied them to `index.html`.
+- **Analytics Migration**: Extracted and implemented the GA4 tracking snippet (`G-69PTZH71WM`) from the original site.
 - **Context Request**: User requested a context stewardship document in a `prompts/` directory to retain project knowledge.

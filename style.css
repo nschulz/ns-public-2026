@@ -5,6 +5,7 @@
   --accent-violet: #7000ff;
   --glass-bg: rgba(255, 255, 255, 0.05);
   --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-border-hover: rgba(255, 255, 255, 0.3);
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -153,10 +154,16 @@ h1 {
   overflow: hidden;
 }
 
+.link-card i {
+  margin-right: 12px;
+  font-size: 1.2rem;
+  vertical-align: middle;
+}
+
 .link-card:hover {
   transform: translateY(-4px);
   background: rgba(255, 255, 255, 0.1);
-  border-color: var(--accent-cyan);
+  border-color: var(--glass-border-hover);
   box-shadow: 0 10px 25px rgba(0, 242, 255, 0.15);
 }
 
@@ -278,5 +285,24 @@ footer {
   .profile-img {
     width: 100px;
     height: 100px;
+  }
+}
+
+/* Desktop Motion Adjustments */
+@media (min-width: 768px) {
+  body {
+    animation-duration: 60s;
+  }
+
+  .blob-1 {
+    animation-duration: 40s;
+  }
+
+  .blob-2 {
+    animation-duration: 45s;
+  }
+
+  .blob-3 {
+    animation-duration: 30s;
   }
 }
