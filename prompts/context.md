@@ -13,7 +13,10 @@ This project is a premium, personal branded landing page (Linktree alternative) 
 - **Optimization**: Fully static, no external dependencies (except Google Fonts for performance caching).
 
 ## Design Decisions
-1. **Glassmorphism**: Link cards use `backdrop-filter: blur(12px)` and semi-transparent backgrounds to create a layered, premium feel.
+1. **Modern Editorial Header**: 
+   - Uses a split layout on desktop and a stacked layout on mobile.
+   - Profile photo is a large rounded rectangle (`280x380px`, `32px` radius) instead of a circular avatar.
+2. **Glassmorphism**: Link cards use `backdrop-filter: blur(12px)` and semi-transparent backgrounds to create a layered, premium feel.
 2. **Background Motion**: 
    - **Panning**: The main background image pans slowly (`bgPan` animation) to create a subtle sense of movement.
    - **Floating Blobs**: Decorative blurred blobs (`blob-1`, `blob-2`, `blob-3`) migrate across the screen, adding depth and dynamic color shifts.
@@ -42,4 +45,5 @@ This project is a premium, personal branded landing page (Linktree alternative) 
 - **Background Motion**: User requested motion for the background; implemented CSS panning and floating animated blobs.
 - **SEO Migration**: Extracted titles, descriptions, keywords, and verification tags from `nateschulz.com` and applied them to `index.html`.
 - **Analytics Migration**: Extracted and implemented the GA4 tracking snippet (`G-69PTZH71WM`) from the original site.
+- **Editorial Redesign**: Transitioned from a circular avatar to a large "Modern Editorial" split-header layout for a more professional portfolio feel.
 - **Context Request**: User requested a context stewardship document in a `prompts/` directory to retain project knowledge.
