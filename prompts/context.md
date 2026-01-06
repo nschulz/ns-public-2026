@@ -14,7 +14,10 @@ This project is a premium, personal branded landing page (Linktree alternative) 
 
 ## Design Decisions
 1. **Glassmorphism**: Link cards use `backdrop-filter: blur(12px)` and semi-transparent backgrounds to create a layered, premium feel.
-2. **Animations**: Implemented `fadeInDown` and `fadeInUp` keyframes for a smooth entrance experience and subtle hover transforms on interactive elements.
+2. **Background Motion**: 
+   - **Panning**: The main background image pans slowly (`bgPan` animation) to create a subtle sense of movement.
+   - **Floating Blobs**: Decorative blurred blobs (`blob-1`, `blob-2`, `blob-3`) migrate across the screen, adding depth and dynamic color shifts.
+3. **Animations**: Implemented `fadeInDown` and `fadeInUp` keyframes for a smooth entrance experience and subtle hover transforms on interactive elements.
 3. **Typography**: Uses 'Inter' via Google Fonts for a clean, modern look.
 4. **Color Palette**:
    - Background: `#0a0b10` (Deep Space Blue)
@@ -36,4 +39,5 @@ This project is a premium, personal branded landing page (Linktree alternative) 
 ## Conversation History
 - **Initial Request**: Project started on Jan 6, 2026. Goal: Create a personal branded landing page similar to Linktree.
 - **Design Approval**: User approved "Futuristic Dark Mode" with glassmorphism.
+- **Background Motion**: User requested motion for the background; implemented CSS panning and floating animated blobs.
 - **Context Request**: User requested a context stewardship document in a `prompts/` directory to retain project knowledge.

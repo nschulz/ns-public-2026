@@ -20,8 +20,9 @@ body {
   color: var(--text-color);
   line-height: 1.6;
   overflow-x: hidden;
-  background-image: url('assets/background.png');
-  background-size: cover;
+  background-image: linear-gradient(rgba(10, 11, 16, 0.7), rgba(10, 11, 16, 0.7)), url('assets/background.png');
+  background-size: 130%;
+  /* Increased for more pan room */
   background-position: center;
   background-attachment: fixed;
   min-height: 100vh;
@@ -29,6 +30,58 @@ body {
   flex-direction: column;
   align-items: center;
   padding: 2rem 1rem;
+  animation: bgPan 25s ease-in-out infinite alternate;
+}
+
+/* Background Decorations */
+.bg-decor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.25;
+  /* Increased opacity */
+  transition: var(--transition);
+}
+
+.blob-1 {
+  width: 600px;
+  /* Increased size */
+  height: 600px;
+  background: var(--accent-cyan);
+  top: -200px;
+  left: -200px;
+  animation: float1 18s infinite alternate ease-in-out;
+}
+
+.blob-2 {
+  width: 700px;
+  /* Increased size */
+  height: 700px;
+  background: var(--accent-violet);
+  bottom: -250px;
+  right: -250px;
+  animation: float2 22s infinite alternate-reverse ease-in-out;
+}
+
+.blob-3 {
+  width: 300px;
+  height: 300px;
+  background: var(--accent-cyan);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: float3 12s infinite alternate ease-in-out;
 }
 
 .container {
@@ -63,6 +116,7 @@ h1 {
   margin-bottom: 0.5rem;
   background: linear-gradient(90deg, var(--accent-cyan), var(--accent-violet));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -141,23 +195,88 @@ footer {
 }
 
 /* Animations */
+@keyframes bgPan {
+  0% {
+    background-position: 0% 0%;
+  }
+
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+@keyframes float1 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  100% {
+    transform: translate(200px, 100px) scale(1.2);
+  }
+}
+
+@keyframes float2 {
+  0% {
+    transform: translate(0, 0) scale(1.2);
+  }
+
+  100% {
+    transform: translate(-250px, -150px) scale(1);
+  }
+}
+
+@keyframes float3 {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  100% {
+    transform: translate(-40%, -60%) scale(1.2);
+  }
+}
+
 @keyframes fadeInDown {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 /* Responsive Scaling */
 @media (max-width: 480px) {
-  h1 { font-size: 2rem; }
-  .profile-img { width: 100px; height: 100px; }
+  h1 {
+    font-size: 2rem;
+  }
+
+  .profile-img {
+    width: 100px;
+    height: 100px;
+  }
 }
