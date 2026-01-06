@@ -21,41 +21,43 @@
         const statements = [
             `Hi, I'm Nate.\nI work in “computers”.`,
             `I used Netscape.`,
-            `I had Yellow Pages for the Web.`,
+            `I had Yellow Pages for the World Wide Web.`,
             `I wrote PHP before it ran in HipHop.`,
             `I went social in the 'The' era.`,
             `I once sent my boss our 'Tim Cook' demo at 5am.`,
             `You'll find me at Amazon, building teams and software for Ring.`,
         ];
 
+        const container = document.querySelector('.typewriter-container');
         let statementIndex = 0;
         let charIndex = 0;
-        let isDeleting = false;
         let typingSpeed = 100;
 
         function type() {
             const currentStatement = statements[statementIndex];
 
-            if (isDeleting) {
-                textElement.textContent = currentStatement.substring(0, charIndex - 1);
-                charIndex--;
-                typingSpeed = 50;
+            textElement.textContent = currentStatement.substring(0, charIndex + 1);
+            charIndex++;
+            typingSpeed = 100;
+
+            if (charIndex === currentStatement.length) {
+                // Statement fully typed
+                setTimeout(() => {
+                    container.classList.add('fade-out-up');
+
+                    // Wait for fade animation to complete
+                    setTimeout(() => {
+                        container.classList.remove('fade-out-up');
+                        textElement.textContent = '';
+                        charIndex = 0;
+                        statementIndex = (statementIndex + 1) % statements.length;
+                        // Start next statement
+                        setTimeout(type, 500);
+                    }, 800); // Matches CSS animation duration
+                }, 2000); // Pause at end of statement
             } else {
-                textElement.textContent = currentStatement.substring(0, charIndex + 1);
-                charIndex++;
-                typingSpeed = 100;
+                setTimeout(type, typingSpeed);
             }
-
-            if (!isDeleting && charIndex === currentStatement.length) {
-                isDeleting = true;
-                typingSpeed = 2000; // Pause at the end
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                statementIndex = (statementIndex + 1) % statements.length;
-                typingSpeed = 500; // Pause before next
-            }
-
-            setTimeout(type, typingSpeed);
         }
 
         // Start the effect

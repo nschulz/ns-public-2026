@@ -40,13 +40,30 @@ body {
 
 .cursor {
     display: inline-block;
-    width: 0.15em;
+    width: 0.6em;
     height: 1.1em;
     background-color: var(--accent-color);
     margin-left: 0.1em;
     vertical-align: middle;
     animation: blink 0.8s infinite;
 }
+
+.fade-out-up {
+    animation: fadeOutUp 0.8s forwards ease-in-out;
+}
+
+@keyframes fadeOutUp {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+}
+
 
 @keyframes blink {
 
