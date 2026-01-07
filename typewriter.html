@@ -21,13 +21,14 @@
         const statements = [
             `Hi, I'm Nate.`,
             `I work in “computers”.`,
-            `I “hacked” with ResEdit.`,
+            `I studied Physics & Astronomy...`,
+            `...after missing the deadline for film school.`,
             `I had Yellow Pages for the Web.`,
-            `Removing Netscape's focus ring changed my life.`,
-            `I made web pages with tables.`,
-            `I wrote PHP before it ran in HipHop.`,
-            `I went social in the 'The' era.`,
-            `I'm building software and teams in the 'A.I.' era.`,
+            `I've read Apple's HIG cover to cover.`,
+            `I wrote PHP before it ran in HipHop...`,
+            `...but Javascript changed my life.`,
+            `I became a professional in the “The” era.`,
+            `I'm building software and teams in the “A.I.” era.`,
             `You can find me at Amazon, delivering for Ring.`,
             `Connect with me →`
         ];
@@ -37,77 +38,91 @@
         let currentElement = null;
         let cursor = null;
 
+        let lastTime = 0;
+        let state = 'PAUSED_START';
+        let stateTimeout = 1000; // Initial delay
+        const typingSpeed = 80;
+        const endPause = 2000;
+        const startPause = 500;
+
         function createStatementElement() {
             const div = document.createElement('div');
             div.className = 'statement';
             container.appendChild(div);
 
-            // Create cursor if it doesn't exist, otherwise move it
             if (!cursor) {
                 cursor = document.createElement('span');
                 cursor.className = 'cursor';
             }
-
             return div;
         }
 
-        function type() {
-            if (charIndex === 0) {
-                currentElement = createStatementElement();
-                currentElement.appendChild(cursor);
-            }
+        function animate(currentTime) {
+            if (!lastTime) lastTime = currentTime;
+            const deltaTime = currentTime - lastTime;
 
-            const currentText = statements[statementIndex];
+            if (state === 'TYPING') {
+                if (deltaTime >= typingSpeed) {
+                    const currentText = statements[statementIndex];
 
-            // Insert text before the cursor
-            const textNode = document.createTextNode(currentText.substring(charIndex, charIndex + 1));
-            currentElement.insertBefore(textNode, cursor);
-
-            charIndex++;
-
-            // Auto-scroll to bottom
-            window.scrollTo({
-                top: document.body.scrollHeight,
-                behavior: 'smooth'
-            });
-
-            if (charIndex === currentText.length) {
-                // Statement finished
-                setTimeout(() => {
-                    // Don't fade out the last statement (the arrow)
-                    if (statementIndex < statements.length - 1) {
-                        currentElement.classList.add('finished');
-                    } else {
-                        // Transform the arrow into a link
-                        currentElement.classList.add('nav-link');
-                        const link = document.createElement('a');
-                        link.href = 'index.html';
-                        link.textContent = currentText;
-                        currentElement.textContent = '';
-                        currentElement.appendChild(link);
-                        // Move cursor into link
-                        link.appendChild(cursor);
+                    if (charIndex === 0) {
+                        currentElement = createStatementElement();
+                        currentElement.appendChild(cursor);
                     }
 
-                    // Pause before next statement
-                    setTimeout(() => {
+                    const textNode = document.createTextNode(currentText.substring(charIndex, charIndex + 1));
+                    currentElement.insertBefore(textNode, cursor);
+                    charIndex++;
+
+                    window.scrollTo({
+                        top: document.body.scrollHeight,
+                        behavior: 'smooth'
+                    });
+
+                    if (charIndex === currentText.length) {
+                        state = 'PAUSED_END';
+                        stateTimeout = endPause;
+                    }
+                    lastTime = currentTime;
+                }
+            } else if (state === 'PAUSED_END' || state === 'PAUSED_START') {
+                if (deltaTime >= stateTimeout) {
+                    if (state === 'PAUSED_END') {
+                        // Handle transition
+                        if (statementIndex < statements.length - 1) {
+                            currentElement.classList.add('finished');
+                        } else {
+                            currentElement.classList.add('nav-link');
+                            const link = document.createElement('a');
+                            link.href = 'index.html';
+                            link.textContent = statements[statementIndex];
+                            currentElement.textContent = '';
+                            currentElement.appendChild(link);
+                            link.appendChild(cursor);
+                        }
+
                         charIndex = 0;
                         statementIndex++;
 
                         if (statementIndex < statements.length) {
-                            type();
+                            state = 'PAUSED_START';
+                            stateTimeout = startPause;
                         } else {
-                            // Final state reached
+                            state = 'FINISHED';
                         }
-                    }, 500);
-                }, 2000); // Wait at end of statement
-            } else {
-                setTimeout(type, 80); // Typing speed
+                    } else if (state === 'PAUSED_START') {
+                        state = 'TYPING';
+                    }
+                    lastTime = currentTime;
+                }
+            }
+
+            if (state !== 'FINISHED') {
+                requestAnimationFrame(animate);
             }
         }
 
-        // Start the process
-        setTimeout(type, 1000);
+        requestAnimationFrame(animate);
     </script>
 </body>
 
