@@ -9,12 +9,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="typewriter.css">
+    <script>
+        // Set return_visit timestamp in localStorage
+        localStorage.setItem('return_visit', Date.now().toString());
+    </script>
 </head>
 
 <body>
     <div class="typewriter-container" id="container">
         <!-- Statements will be added here dynamically -->
     </div>
+
+    <a href="index.html?skipped=1" class="skip-button">Skip ⏭</a>
 
     <script>
         const container = document.getElementById('container');
@@ -24,7 +30,6 @@
             `I studied Physics & Astronomy...`,
             `...after missing the deadline for film school.`,
             `I had Yellow Pages for the Web.`,
-            `I've read Apple's HIG cover to cover.`,
             `I wrote PHP before it ran in HipHop...`,
             `...but Javascript changed my life.`,
             `I became a professional in the “The” era.`,
@@ -94,7 +99,7 @@
                         } else {
                             currentElement.classList.add('nav-link');
                             const link = document.createElement('a');
-                            link.href = 'index.html';
+                            link.href = 'index.html?skipped=1';
                             link.textContent = statements[statementIndex];
                             currentElement.textContent = '';
                             currentElement.appendChild(link);

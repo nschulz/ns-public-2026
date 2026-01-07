@@ -1,8 +1,12 @@
+@view-transition {
+    navigation: auto;
+}
+
 :root {
     --bg-color: #050505;
     --text-color: #ffffff;
     --accent-color: #00ff88;
-    --faded-color: rgba(255, 255, 255, 0.25);
+    --faded-color: #333;
     --font-size-large: 10vw;
     --font-size-medium: 6vw;
 }
@@ -24,6 +28,7 @@ body {
 }
 
 .typewriter-container {
+    view-transition-name: page-content;
     max-width: 90vw;
     text-align: left;
     margin: 0 auto;
@@ -65,6 +70,47 @@ body {
 .nav-link a:hover {
     color: var(--accent-color);
     transform: translateX(10px);
+}
+
+.skip-button {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    padding: 0.8rem 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 100;
+    animation: fadeIn 1s ease-out 1s both;
+}
+
+.skip-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--accent-color);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 0 15px rgba(0, 255, 136, 0.1);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes blink {

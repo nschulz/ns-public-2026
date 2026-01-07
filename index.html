@@ -2,6 +2,17 @@
 <html lang="en">
 
 <head>
+    <script>
+        // Check for return_visit (12-hour persistence) OR skip override
+        const urlParams = new URLSearchParams(window.location.search);
+        const lastVisit = localStorage.getItem('return_visit');
+        const twelveHours = 12 * 60 * 60 * 1000;
+        const hasSkipParam = urlParams.get('skipped') === '1';
+
+        if (!hasSkipParam && (!lastVisit || (Date.now() - parseInt(lastVisit) > twelveHours))) {
+            window.location.href = 'intro.html';
+        }
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0">
     <title>Nate Schulz | Builder</title>
@@ -51,8 +62,8 @@
             <a href="https://mastodon.social/@nathas" rel="me" class="link-card"><i
                     class="fab fa-mastodon"></i>Toots</a>
             <a href="https://twitter.com/nschulz" class="link-card"><i class="fab fa-twitter"></i>Tweets</a>
-            <a href="https://nateschulz.com/legacy/index.html" class="link-card"><i class="fas fa-history"></i>Archive
-            </a>
+            <a href="intro.html" class="link-card" onclick="localStorage.removeItem('return_visit')"><i
+                    class="fas fa-history"></i>Replay Intro</a>
         </main>
 
     </div>
