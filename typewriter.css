@@ -3,12 +3,14 @@
 }
 
 :root {
-    --bg-color: #050505;
+    --bg-color: #0a0b10;
     --text-color: #ffffff;
     --accent-color: #00ff88;
-    --faded-color: #333;
+    --faded-color: rgba(255, 255, 255, 0.25);
     --font-size-large: 10vw;
     --font-size-medium: 6vw;
+    --accent-cyan: #00f2ff;
+    --accent-violet: #7000ff;
 }
 
 * {
@@ -25,6 +27,23 @@ body {
     padding: 15vh 2rem;
     line-height: 1.2;
     overflow-x: hidden;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: -50px;
+    left: -50px;
+    right: -50px;
+    bottom: -50px;
+    background-image: url('assets/background.jpg');
+    background-size: 130%;
+    background-position: center;
+    background-attachment: fixed;
+    z-index: -1;
+    animation: bgPan 60s linear infinite, introBackgroundFade 20s ease-out forwards;
+    opacity: 0;
 }
 
 .typewriter-container {
@@ -35,6 +54,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10vw;
+    mix-blend-mode: plus-lighter;
 }
 
 .statement {
@@ -122,6 +142,31 @@ body {
 
     50% {
         opacity: 0;
+    }
+}
+
+@keyframes bgPan {
+    0% {
+        background-position: 0% 0%;
+    }
+
+    100% {
+        background-position: 100% 100%;
+    }
+}
+
+@keyframes introBackgroundFade {
+    from {
+        opacity: 0;
+    }
+
+    25% {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 0.6;
+        /* Balanced for readability */
     }
 }
 
